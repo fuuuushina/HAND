@@ -12,15 +12,15 @@ from mediapipe.tasks.python import vision
 # ============================================================
 # CONFIG
 # ============================================================
-DRY_RUN = True            # True = pas de main branchée, on print seulement. False = envoie aux servos.
+DRY_RUN = False           # True = pas de main branchée, on print seulement. False = envoie aux servos.
 SERIAL_PORT = "COM3"
 MAIN_SUIVIE = "Right"     # la main humaine qui pilote le robot
-INVERSER_LABEL = True     # ton code d'origine inversait Left/Right ; mets False si le label affiché est faux
+INVERSER_LABEL = True
 
 # Main robot (tes valeurs)
 IDS = [1, 11, 21, 31, 41, 51, 61, 71]   # index1, index2, majeur1, majeur2, annulaire1, annulaire2, pouce1, pouce2
 MiddlePos = [-0.3, 0.3, -0.3, 0.0, -0.6, -0.3, 0.3, -0.9]
-MaxSpeed = 7
+MaxSpeed = 10
 
 # Consigne robot pour Angle_1 (Angle_2 = -Angle_1), comme dans OpenHand / CloseHand
 OUVERT = 10
@@ -30,15 +30,15 @@ FERME = -100
 # La flexion = somme des (180 - angle) aux articulations MCP + PIP.
 # Ajuste flexion max si le robot ne ferme jamais complètement (baisse) ou ferme trop tôt (monte).
 DOIGTS = {
-    "Index":     (0, 1, [(0, 5, 6),   (5, 6, 7)],    160),
+    "Annulaire":     (0, 1, [(0, 5, 6),   (5, 6, 7)],    160),
     "Majeur":    (2, 3, [(0, 9, 10),  (9, 10, 11)],  160),
-    "Annulaire": (4, 5, [(0, 13, 14), (13, 14, 15)], 160),
+    "Index": (4, 5, [(0, 13, 14), (13, 14, 15)], 160),
     "Pouce":     (6, 7, [(1, 2, 3),   (2, 3, 4)],    100),
 }
-BOUTS = {"Index": 8, "Majeur": 12, "Annulaire": 16, "Pouce": 4}   # pour placer le texte à l'écran
+BOUTS = {"Annulaire": 8, "Majeur": 12, "Index": 16, "Pouce": 4}   # pour placer le texte à l'écran
 
 ALPHA = 0.3            # lissage : 0 = figé, 1 = aucun lissage
-ENVOI_HZ = 20          # fréquence d'envoi des consignes au robot
+ENVOI_HZ = 40          # fréquence d'envoi des consignes au robot
 PRINT_PERIODE = 0.2    # secondes entre deux affichages console
 
 BONES = [(0, 1), (1, 2), (2, 3), (3, 4),
